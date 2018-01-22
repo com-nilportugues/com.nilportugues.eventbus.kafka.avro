@@ -14,8 +14,8 @@ public class KafkaAvroEventConsumer {
     private final EventHandlerDispatcher dispatcher;
 
     public KafkaAvroEventConsumer(final EventHandlerDispatcher dispatcher,
-                                  final KafkaConsumerFactory consumerFactory,
-                                  final String topic) {
+        final KafkaConsumerFactory consumerFactory,
+        final String topic) {
 
         this.consumer = consumerFactory.build(topic);
         this.dispatcher = dispatcher;

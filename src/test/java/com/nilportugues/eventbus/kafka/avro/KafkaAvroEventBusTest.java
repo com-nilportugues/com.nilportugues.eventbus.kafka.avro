@@ -21,7 +21,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
-
 public class KafkaAvroEventBusTest {
 
     private static EventBus eventBus;
@@ -29,19 +28,6 @@ public class KafkaAvroEventBusTest {
     private static SpyKafkaAvroEventPublisher eventPublisher;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-
-    }
-
-    @AfterEach
-    public void cleanUpStreams() {
-        System.setOut(null);
-        System.setErr(null);
-    }
 
     @BeforeClass
     public static void setUp() {
@@ -70,11 +56,17 @@ public class KafkaAvroEventBusTest {
         eventSubscriber.subscribe(UserRegisteredEvent.class, "EventHandler");
     }
 
-    public static class UserRegisteredAvroDeserializer extends AvroDeserializer<UserRegisteredEvent> {
+    @BeforeEach
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
 
-        public UserRegisteredAvroDeserializer() {
-            super(UserRegisteredEvent.class);
-        }
+    }
+
+    @AfterEach
+    public void cleanUpStreams() {
+        System.setOut(null);
+        System.setErr(null);
     }
 
     @Test
@@ -107,6 +99,13 @@ public class KafkaAvroEventBusTest {
         System.out.println("ACTUAL:\t\t" + actual.toString());
 
         Assert.assertEquals(expected, actual);
+    }
+
+    public static class UserRegisteredAvroDeserializer extends AvroDeserializer<UserRegisteredEvent> {
+
+        public UserRegisteredAvroDeserializer() {
+            super(UserRegisteredEvent.class);
+        }
     }
 
     private static class SpyKafkaAvroEventPublisher<T extends SpecificRecordBase> extends KafkaAvroEventPublisher<T> {
@@ -142,8 +141,8 @@ public class KafkaAvroEventBusTest {
         private Object consumedEvent;
 
         SpyKafkaAvroEventConsumer(EventHandlerDispatcher dispatcher,
-                                  KafkaConsumerFactory consumerFactory,
-                                  String topic) {
+            KafkaConsumerFactory consumerFactory,
+            String topic) {
 
             super(dispatcher, consumerFactory, topic);
             this.consumer = consumerFactory.build(topic);
@@ -152,7 +151,7 @@ public class KafkaAvroEventBusTest {
 
         @Override
         public void consume() {
-            while(true) {
+            while (true) {
                 for (Object record : consumer.poll(TIMEOUT)) {
                     ConsumerRecord r = (ConsumerRecord) record;
                     if (null != r.value()) {

@@ -15,26 +15,34 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-
 @AvroGenerated
 public class UserRegisteredEventPayload extends SpecificRecordBase implements SpecificRecord {
+    public static final Schema SCHEMA$ = (new Schema.Parser()).parse(
+        "{\"type\":\"record\",\"name\":\"UserRegisteredEventPayload\",\"namespace\":\"com.nilportugues.oauth.event.domain.user\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"attributes\",\"type\":{\"type\":\"record\",\"name\":\"UserRegisteredEventAttributes\",\"fields\":[{\"name\":\"createdAt\",\"type\":\"string\"}]}}]}");
     private static final long serialVersionUID = -5811988065521355642L;
-    public static final Schema SCHEMA$ = (new Schema.Parser()).parse("{\"type\":\"record\",\"name\":\"UserRegisteredEventPayload\",\"namespace\":\"com.nilportugues.oauth.event.domain.user\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"attributes\",\"type\":{\"type\":\"record\",\"name\":\"UserRegisteredEventAttributes\",\"fields\":[{\"name\":\"createdAt\",\"type\":\"string\"}]}}]}");
-    /** @deprecated */
-    @Deprecated
-    public CharSequence id;
-    /** @deprecated */
-    @Deprecated
-    public CharSequence type;
-    /** @deprecated */
-    @Deprecated
-    public UserRegisteredEventAttributes attributes;
     private static final DatumWriter WRITER$;
     private static final DatumReader READER$;
 
-    public static Schema getClassSchema() {
-        return SCHEMA$;
+    static {
+        WRITER$ = new SpecificDatumWriter(SCHEMA$);
+        READER$ = new SpecificDatumReader(SCHEMA$);
     }
+
+    /**
+     * @deprecated
+     */
+    @Deprecated
+    public CharSequence id;
+    /**
+     * @deprecated
+     */
+    @Deprecated
+    public CharSequence type;
+    /**
+     * @deprecated
+     */
+    @Deprecated
+    public UserRegisteredEventAttributes attributes;
 
     public UserRegisteredEventPayload() {
     }
@@ -45,12 +53,28 @@ public class UserRegisteredEventPayload extends SpecificRecordBase implements Sp
         this.attributes = attributes;
     }
 
+    public static Schema getClassSchema() {
+        return SCHEMA$;
+    }
+
+    public static UserRegisteredEventPayload.Builder newBuilder() {
+        return new UserRegisteredEventPayload.Builder();
+    }
+
+    public static UserRegisteredEventPayload.Builder newBuilder(UserRegisteredEventPayload.Builder other) {
+        return new UserRegisteredEventPayload.Builder(other);
+    }
+
+    public static UserRegisteredEventPayload.Builder newBuilder(UserRegisteredEventPayload other) {
+        return new UserRegisteredEventPayload.Builder(other);
+    }
+
     public Schema getSchema() {
         return SCHEMA$;
     }
 
     public Object get(int field$) {
-        switch(field$) {
+        switch (field$) {
             case 0:
                 return this.id;
             case 1:
@@ -63,15 +87,15 @@ public class UserRegisteredEventPayload extends SpecificRecordBase implements Sp
     }
 
     public void put(int field$, Object value$) {
-        switch(field$) {
+        switch (field$) {
             case 0:
-                this.id = (CharSequence)value$;
+                this.id = (CharSequence) value$;
                 break;
             case 1:
-                this.type = (CharSequence)value$;
+                this.type = (CharSequence) value$;
                 break;
             case 2:
-                this.attributes = (UserRegisteredEventAttributes)value$;
+                this.attributes = (UserRegisteredEventAttributes) value$;
                 break;
             default:
                 throw new AvroRuntimeException("Bad index");
@@ -103,29 +127,12 @@ public class UserRegisteredEventPayload extends SpecificRecordBase implements Sp
         this.attributes = value;
     }
 
-    public static UserRegisteredEventPayload.Builder newBuilder() {
-        return new UserRegisteredEventPayload.Builder();
-    }
-
-    public static UserRegisteredEventPayload.Builder newBuilder(UserRegisteredEventPayload.Builder other) {
-        return new UserRegisteredEventPayload.Builder(other);
-    }
-
-    public static UserRegisteredEventPayload.Builder newBuilder(UserRegisteredEventPayload other) {
-        return new UserRegisteredEventPayload.Builder(other);
-    }
-
     public void writeExternal(ObjectOutput out) throws IOException {
         WRITER$.write(this, SpecificData.getEncoder(out));
     }
 
     public void readExternal(ObjectInput in) throws IOException {
         READER$.read(this, SpecificData.getDecoder(in));
-    }
-
-    static {
-        WRITER$ = new SpecificDatumWriter(SCHEMA$);
-        READER$ = new SpecificDatumReader(SCHEMA$);
     }
 
     public static class Builder extends SpecificRecordBuilderBase<UserRegisteredEventPayload> implements RecordBuilder<UserRegisteredEventPayload> {
@@ -140,22 +147,22 @@ public class UserRegisteredEventPayload extends SpecificRecordBase implements Sp
 
         private Builder(UserRegisteredEventPayload.Builder other) {
             super(other);
-            if(isValidValue(this.fields()[0], other.id)) {
-                this.id = (CharSequence)this.data().deepCopy(this.fields()[0].schema(), other.id);
+            if (isValidValue(this.fields()[0], other.id)) {
+                this.id = (CharSequence) this.data().deepCopy(this.fields()[0].schema(), other.id);
                 this.fieldSetFlags()[0] = true;
             }
 
-            if(isValidValue(this.fields()[1], other.type)) {
-                this.type = (CharSequence)this.data().deepCopy(this.fields()[1].schema(), other.type);
+            if (isValidValue(this.fields()[1], other.type)) {
+                this.type = (CharSequence) this.data().deepCopy(this.fields()[1].schema(), other.type);
                 this.fieldSetFlags()[1] = true;
             }
 
-            if(isValidValue(this.fields()[2], other.attributes)) {
-                this.attributes = (UserRegisteredEventAttributes)this.data().deepCopy(this.fields()[2].schema(), other.attributes);
+            if (isValidValue(this.fields()[2], other.attributes)) {
+                this.attributes = (UserRegisteredEventAttributes) this.data().deepCopy(this.fields()[2].schema(), other.attributes);
                 this.fieldSetFlags()[2] = true;
             }
 
-            if(other.hasAttributesBuilder()) {
+            if (other.hasAttributesBuilder()) {
                 this.attributesBuilder = UserRegisteredEventAttributes.newBuilder(other.getAttributesBuilder());
             }
 
@@ -163,18 +170,18 @@ public class UserRegisteredEventPayload extends SpecificRecordBase implements Sp
 
         private Builder(UserRegisteredEventPayload other) {
             super(UserRegisteredEventPayload.SCHEMA$);
-            if(isValidValue(this.fields()[0], other.id)) {
-                this.id = (CharSequence)this.data().deepCopy(this.fields()[0].schema(), other.id);
+            if (isValidValue(this.fields()[0], other.id)) {
+                this.id = (CharSequence) this.data().deepCopy(this.fields()[0].schema(), other.id);
                 this.fieldSetFlags()[0] = true;
             }
 
-            if(isValidValue(this.fields()[1], other.type)) {
-                this.type = (CharSequence)this.data().deepCopy(this.fields()[1].schema(), other.type);
+            if (isValidValue(this.fields()[1], other.type)) {
+                this.type = (CharSequence) this.data().deepCopy(this.fields()[1].schema(), other.type);
                 this.fieldSetFlags()[1] = true;
             }
 
-            if(isValidValue(this.fields()[2], other.attributes)) {
-                this.attributes = (UserRegisteredEventAttributes)this.data().deepCopy(this.fields()[2].schema(), other.attributes);
+            if (isValidValue(this.fields()[2], other.attributes)) {
+                this.attributes = (UserRegisteredEventAttributes) this.data().deepCopy(this.fields()[2].schema(), other.attributes);
                 this.fieldSetFlags()[2] = true;
             }
 
@@ -240,8 +247,8 @@ public class UserRegisteredEventPayload extends SpecificRecordBase implements Sp
         }
 
         public UserRegisteredEventAttributes.Builder getAttributesBuilder() {
-            if(this.attributesBuilder == null) {
-                if(this.hasAttributes()) {
+            if (this.attributesBuilder == null) {
+                if (this.hasAttributes()) {
                     this.setAttributesBuilder(UserRegisteredEventAttributes.newBuilder(this.attributes));
                 } else {
                     this.setAttributesBuilder(UserRegisteredEventAttributes.newBuilder());
@@ -271,12 +278,12 @@ public class UserRegisteredEventPayload extends SpecificRecordBase implements Sp
         public UserRegisteredEventPayload build() {
             try {
                 UserRegisteredEventPayload e = new UserRegisteredEventPayload();
-                e.id = this.fieldSetFlags()[0]?this.id:(CharSequence)this.defaultValue(this.fields()[0]);
-                e.type = this.fieldSetFlags()[1]?this.type:(CharSequence)this.defaultValue(this.fields()[1]);
-                if(this.attributesBuilder != null) {
+                e.id = this.fieldSetFlags()[0] ? this.id : (CharSequence) this.defaultValue(this.fields()[0]);
+                e.type = this.fieldSetFlags()[1] ? this.type : (CharSequence) this.defaultValue(this.fields()[1]);
+                if (this.attributesBuilder != null) {
                     e.attributes = this.attributesBuilder.build();
                 } else {
-                    e.attributes = this.fieldSetFlags()[2]?this.attributes:(UserRegisteredEventAttributes)this.defaultValue(this.fields()[2]);
+                    e.attributes = this.fieldSetFlags()[2] ? this.attributes : (UserRegisteredEventAttributes) this.defaultValue(this.fields()[2]);
                 }
 
                 return e;

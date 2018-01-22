@@ -17,7 +17,7 @@ public class KafkaAvroEventPublisher<T extends SpecificRecordBase> implements Ev
     private final String topic;
 
     public KafkaAvroEventPublisher(final KafkaProducerFactory factory,
-                                   final String topic) {
+        final String topic) {
 
         this.producer = factory.build();
         this.topic = topic;

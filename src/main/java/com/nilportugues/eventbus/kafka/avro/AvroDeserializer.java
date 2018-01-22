@@ -15,7 +15,6 @@ import java.util.Map;
 
 abstract class AvroDeserializer<T extends SpecificRecordBase> implements Deserializer<T> {
 
-
     protected Class<T> clazz;
     protected Schema schema;
 
@@ -47,7 +46,7 @@ abstract class AvroDeserializer<T extends SpecificRecordBase> implements Deseria
                 final GenericRecord genericRecord = genericRecordInjection.invert(data).get();
                 final GenericRecord record = SpecificData.get().deepCopy(schema, genericRecord);
 
-                //Because of nested Avros...
+                // Because of nested Avros...
                 return (new ObjectMapper()).readValue(record.toString(), clazz);
             }
         } catch (Exception ex) {

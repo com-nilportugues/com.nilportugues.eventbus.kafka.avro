@@ -17,17 +17,22 @@ import java.io.ObjectOutput;
 
 @AvroGenerated
 public class UserRegisteredEventAttributes extends SpecificRecordBase implements SpecificRecord {
+    public static final Schema SCHEMA$ = (new Schema.Parser()).parse(
+        "{\"type\":\"record\",\"name\":\"UserRegisteredEventAttributes\",\"namespace\":\"com.nilportugues.oauth.event.domain.user\",\"fields\":[{\"name\":\"createdAt\",\"type\":\"string\"}]}");
     private static final long serialVersionUID = 5494362182619697881L;
-    public static final Schema SCHEMA$ = (new Schema.Parser()).parse("{\"type\":\"record\",\"name\":\"UserRegisteredEventAttributes\",\"namespace\":\"com.nilportugues.oauth.event.domain.user\",\"fields\":[{\"name\":\"createdAt\",\"type\":\"string\"}]}");
-    /** @deprecated */
-    @Deprecated
-    public CharSequence createdAt;
     private static final DatumWriter WRITER$;
     private static final DatumReader READER$;
 
-    public static Schema getClassSchema() {
-        return SCHEMA$;
+    static {
+        WRITER$ = new SpecificDatumWriter(SCHEMA$);
+        READER$ = new SpecificDatumReader(SCHEMA$);
     }
+
+    /**
+     * @deprecated
+     */
+    @Deprecated
+    public CharSequence createdAt;
 
     public UserRegisteredEventAttributes() {
     }
@@ -36,35 +41,8 @@ public class UserRegisteredEventAttributes extends SpecificRecordBase implements
         this.createdAt = createdAt;
     }
 
-    public Schema getSchema() {
+    public static Schema getClassSchema() {
         return SCHEMA$;
-    }
-
-    public Object get(int field$) {
-        switch(field$) {
-            case 0:
-                return this.createdAt;
-            default:
-                throw new AvroRuntimeException("Bad index");
-        }
-    }
-
-    public void put(int field$, Object value$) {
-        switch(field$) {
-            case 0:
-                this.createdAt = (CharSequence)value$;
-                return;
-            default:
-                throw new AvroRuntimeException("Bad index");
-        }
-    }
-
-    public CharSequence getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setCreatedAt(CharSequence value) {
-        this.createdAt = value;
     }
 
     public static UserRegisteredEventAttributes.Builder newBuilder() {
@@ -79,17 +57,43 @@ public class UserRegisteredEventAttributes extends SpecificRecordBase implements
         return new UserRegisteredEventAttributes.Builder(other);
     }
 
+    public Schema getSchema() {
+        return SCHEMA$;
+    }
+
+    public Object get(int field$) {
+        switch (field$) {
+            case 0:
+                return this.createdAt;
+            default:
+                throw new AvroRuntimeException("Bad index");
+        }
+    }
+
+    public void put(int field$, Object value$) {
+        switch (field$) {
+            case 0:
+                this.createdAt = (CharSequence) value$;
+                return;
+            default:
+                throw new AvroRuntimeException("Bad index");
+        }
+    }
+
+    public CharSequence getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(CharSequence value) {
+        this.createdAt = value;
+    }
+
     public void writeExternal(ObjectOutput out) throws IOException {
         WRITER$.write(this, SpecificData.getEncoder(out));
     }
 
     public void readExternal(ObjectInput in) throws IOException {
         READER$.read(this, SpecificData.getDecoder(in));
-    }
-
-    static {
-        WRITER$ = new SpecificDatumWriter(SCHEMA$);
-        READER$ = new SpecificDatumReader(SCHEMA$);
     }
 
     public static class Builder extends SpecificRecordBuilderBase<UserRegisteredEventAttributes> implements RecordBuilder<UserRegisteredEventAttributes> {
@@ -101,8 +105,8 @@ public class UserRegisteredEventAttributes extends SpecificRecordBase implements
 
         private Builder(UserRegisteredEventAttributes.Builder other) {
             super(other);
-            if(isValidValue(this.fields()[0], other.createdAt)) {
-                this.createdAt = (CharSequence)this.data().deepCopy(this.fields()[0].schema(), other.createdAt);
+            if (isValidValue(this.fields()[0], other.createdAt)) {
+                this.createdAt = (CharSequence) this.data().deepCopy(this.fields()[0].schema(), other.createdAt);
                 this.fieldSetFlags()[0] = true;
             }
 
@@ -110,8 +114,8 @@ public class UserRegisteredEventAttributes extends SpecificRecordBase implements
 
         private Builder(UserRegisteredEventAttributes other) {
             super(UserRegisteredEventAttributes.SCHEMA$);
-            if(isValidValue(this.fields()[0], other.createdAt)) {
-                this.createdAt = (CharSequence)this.data().deepCopy(this.fields()[0].schema(), other.createdAt);
+            if (isValidValue(this.fields()[0], other.createdAt)) {
+                this.createdAt = (CharSequence) this.data().deepCopy(this.fields()[0].schema(), other.createdAt);
                 this.fieldSetFlags()[0] = true;
             }
 
@@ -141,7 +145,7 @@ public class UserRegisteredEventAttributes extends SpecificRecordBase implements
         public UserRegisteredEventAttributes build() {
             try {
                 UserRegisteredEventAttributes e = new UserRegisteredEventAttributes();
-                e.createdAt = this.fieldSetFlags()[0]?this.createdAt:(CharSequence)this.defaultValue(this.fields()[0]);
+                e.createdAt = this.fieldSetFlags()[0] ? this.createdAt : (CharSequence) this.defaultValue(this.fields()[0]);
                 return e;
             } catch (Exception var2) {
                 throw new AvroRuntimeException(var2);

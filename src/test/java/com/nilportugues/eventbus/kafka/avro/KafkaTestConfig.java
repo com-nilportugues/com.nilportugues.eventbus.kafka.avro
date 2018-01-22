@@ -12,9 +12,7 @@ public class KafkaTestConfig {
 
     public static Properties buildProducerProps() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "oauth.kafka1:9092,oauth.kafka2:9093");
-
-        //AVRO EXCLUSIVE
+        props.put("bootstrap.servers", "kafka:9092");
 
         // MANDATORY
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -24,14 +22,14 @@ public class KafkaTestConfig {
 
     public static Properties buildConsumerProps() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "oauth.kafka1:9092,oauth.kafka2:9093");
+        props.put("bootstrap.servers", "kafka:9092");
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "6000");
         props.put("group.id", "event_consumer_kafka_avro");
         props.put("client.id", UUID.randomUUID().toString());
 
-        //AVRO EXCLUSIVE
+        // AVRO EXCLUSIVE
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-       // props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
+        // ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG is set dynamically.
 
         // FOR TESTING PURPOSES
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
