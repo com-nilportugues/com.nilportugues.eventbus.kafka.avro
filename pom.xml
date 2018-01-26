@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.nilportugues.eventbus</groupId>
     <artifactId>kafka-avro</artifactId>
-    <version>1.0.2.RELEASE</version>
+    <version>1.0.0.RELEASE</version>
     <packaging>jar</packaging>
     <name>nilportugues/eventbus-kafka-avro</name>
     <description>An Event Bus implementation using Apache Kafka and Apache Avro</description>
