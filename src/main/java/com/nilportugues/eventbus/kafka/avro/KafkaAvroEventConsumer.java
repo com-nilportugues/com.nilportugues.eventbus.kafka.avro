@@ -23,17 +23,11 @@ public class KafkaAvroEventConsumer {
 
     @SuppressWarnings("unchecked")
     public void consume() {
-
-        new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    for (Object record : consumer.poll(TIMEOUT)) {
-                        forwardToEventHandlers((ConsumerRecord<String, Object>) record);
-                    }
-                }
+        while (true) {
+            for (Object record : consumer.poll(TIMEOUT)) {
+                forwardToEventHandlers((ConsumerRecord<String, Object>) record);
             }
-        }.start();
+        }
     }
 
     private void forwardToEventHandlers(final ConsumerRecord<String, Object> record) {
